@@ -11,6 +11,7 @@ contract MyErc20 {
     mapping(address => uint) balances;
     address deployer;
     
+    // https://app.uniswap.org/#/pool
     // Minting a million coins for yourself
     /*
         The constructor is called when the contract is deployed. 
