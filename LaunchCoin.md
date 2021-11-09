@@ -38,4 +38,35 @@ To run these services, please follow below order
 
 > Minting a million coins for yourself
 
-  
+> Token approvals
+
+These currencies allow for what is called approvals. Think of it as a parent letting their teenage kids spend money. ERC20 specifications require us to implement a function in which a user can give approval to another account to spend a designated number of coins.
+
+This functionality is particularly useful when a user wants to allow a contract to spend money on their behalf. Just like what we saw in the previous quest. We wanted the contract to take our DAI and send it to Uniswap on our behalf. So what we did was, gave approval to the contract to use a certain number of DAI from our account.
+
+The first function is the approve() function. Just like the balances, we must maintain what is the allowance for each user. Each user can give approvals to multiple other users. So, our data type will be
+
+mapping(address => mapping(address => uint)) allowances
+
+Allowances[user1][user2] = 10; implies user1 has approved user2 to spend 10 coins.
+
+> Adding events
+
+There’s another requirement that the ERC20 specification mandates.
+
+It requires that events be triggered for allowance and transfers.
+
+Any program like a web serverver, web app or iPhone application.
+
+The events are mentioned here. You can copy paste the signatures to define the event.
+https://github.com/ethereum/EIPs/blob/f98a60e1b1590c9cfa0bfe66c4e6a674e54cd386/EIPS/eip-20.md#events
+
+
+Now that the events have been defined, they can be emitted. When an event is emitted, the other applications will be able to listen to them.
+
+Transfer has to be emitted whenever a transfer is made. I.e. whenever the transfer() and transferFrom() are successful - so that, say the iphone app, can update the new balance of the user after the transfer in real time.
+
+Approve must be emitted when the approval is made, so that the application can notify the spender that they now have an allowance waiting to be spent!
+
+> Adding to metamask
+> Listing on Uniswap
